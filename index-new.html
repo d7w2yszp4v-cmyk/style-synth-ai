@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#111111"
+  >
+
+  <meta
+    name="description"
+    content="Style Synth AI - Your smart digital wardrobe."
+  >
+
+  <title>Style Synth AI</title>
+
+  <link rel="stylesheet" href="style-new.css">
+</head>
+
+<body>
+
+  <!-- =====================================================
+       HEADER
+       ===================================================== -->
+
+  <header class="app-header">
+
+    <div class="brand">
+      <div class="brand-logo">SS</div>
+
+      <div>
+        <h1>Style Synth</h1>
+        <p>AI Wardrobe</p>
+      </div>
+    </div>
+
+    <button
+      class="menu-button"
+      id="menuButton"
+      type="button"
+      aria-label="Open menu"
+    >
+      ☰
+    </button>
+
+  </header>
+
+
+  <!-- =====================================================
+       NAVIGATION
+       ===================================================== -->
+
+  <nav class="main-nav" id="mainNav">
+
+    <button
+      type="button"
+      data-section="home"
+      class="nav-button active"
+    >
+      Home
+    </button>
+
+    <button
+      type="button"
+      data-section="wardrobe"
+      class="nav-button"
+    >
+      Wardrobe
+    </button>
+
+    <button
+      type="button"
+      data-section="outfits"
+      class="nav-button"
+    >
+      Outfits
+    </button>
+
+    <button
+      type="button"
+      data-section="about"
+      class="nav-button"
+    >
+      About
+    </button>
+
+  </nav>
+
+
+  <!-- =====================================================
+       APP MESSAGE
+       ===================================================== -->
+
+  <div
+    id="appMessage"
+    class="app-message"
+    aria-live="polite"
+  ></div>
+
+
+  <!-- =====================================================
+       MAIN CONTENT
+       ===================================================== -->
+
+  <main>
+
+
+    <!-- ===================================================
+         HOME
+         =================================================== -->
+
+    <section
+      class="page"
+      data-page="home"
+      id="homePage"
+    >
+
+      <div class="hero">
+
+        <div class="hero-content">
+
+          <span class="eyebrow">
+            YOUR DIGITAL WARDROBE
+          </span>
+
+          <h2>
+            Dress smarter.
+            <br>
+            Look better.
+          </h2>
+
+          <p>
+            Upload your clothes and organize your wardrobe
+            with Style Synth.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- ================================================
+           UPLOAD AREA
+           ================================================ -->
+
+      <section class="card upload-card">
+
+        <div class="section-heading">
+
+          <div>
+            <span class="eyebrow">
+              ADD ITEM
+            </span>
+
+            <h2>
+              Add clothing to your wardrobe
+            </h2>
+          </div>
+
+        </div>
+
+
+        <div
+          class="upload-area drop-zone"
+          id="uploadArea"
+        >
+
+          <div class="upload-icon">
+            ↑
+          </div>
+
+          <h3>
+            Upload a clothing photo
+          </h3>
+
+          <p>
+            Choose a photo from your device
+            or drag and drop it here.
+          </p>
+
+          <label
+            for="imageInput"
+            class="primary-button upload-button"
+          >
+            Choose Photo
+          </label>
+
+          <input
+            type="file"
+            id="imageInput"
+            accept="image/*"
+            hidden
+          >
+
+          <small>
+            JPG, PNG or WEBP • Maximum 10 MB
+          </small>
+
+        </div>
+
+
+        <!-- IMAGE PREVIEW -->
+
+        <div
+          class="image-preview"
+          id="imagePreviewContainer"
+        >
+
+          <img
+            id="imagePreview"
+            src=""
+            alt="Uploaded clothing preview"
+          >
+
+        </div>
+
+      </section>
+
+
+      <!-- ================================================
+           ANALYSIS RESULT
+           ================================================ -->
+
+      <section
+        class="card analysis-card"
+        id="analysisResult"
+      >
+
+        <div class="section-heading">
+
+          <div>
+            <span class="eyebrow">
+              STYLE ANALYSIS
+            </span>
+
+            <h2>
+              Item details
+            </h2>
+          </div>
+
+        </div>
+
+
+        <div class="analysis-grid">
+
+
+          <div class="analysis-item">
+
+            <span class="analysis-label">
+              Category
+            </span>
+
+            <strong id="detectedCategory">
+              —
+            </strong>
+
+          </div>
+
+
+          <div class="analysis-item">
+
+            <span class="analysis-label">
+              Color
+            </span>
+
+            <strong id="detectedColor">
+              —
+            </strong>
+
+          </div>
+
+
+          <div class="analysis-item">
+
+            <span class="analysis-label">
+              Brand
+            </span>
+
+            <strong id="detectedBrand">
+              —
+            </strong>
+
+          </div>
+
+
+          <div class="analysis-item">
+
+            <span class="analysis-label">
+              Occasion
+            </span>
+
+            <strong id="detectedOccasion">
+              —
+            </strong>
+
+          </div>
+
+
+        </div>
+
+
+        <!-- EDIT CONTROLS -->
+
+        <div
+          id="editControls"
+          class="edit-controls"
+        ></div>
+
+      </section>
+
+
+      <!-- ================================================
+           QUICK STATS
+           ================================================ -->
+
+      <section class="stats-grid">
+
+        <div class="stat-card">
+
+          <span>
+            Total Items
+          </span>
+
+          <strong id="totalItems">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <span>
+            Tops
+          </span>
+
+          <strong id="topCount">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <span>
+            Bottoms
+          </span>
+
+          <strong id="bottomCount">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <span>
+            Shoes
+          </span>
+
+          <strong id="shoeCount">
+            0
+          </strong>
+
+        </div>
+
+      </section>
+
+
+      <!-- ================================================
+           QUICK ACTIONS
+           ================================================ -->
+
+      <section class="quick-actions">
+
+        <button
+          type="button"
+          class="action-card"
+          data-section="wardrobe"
+        >
+
+          <span class="action-icon">
+            ◈
+          </span>
+
+          <span>
+            View Wardrobe
+          </span>
+
+        </button>
+
+
+        <button
+          type="button"
+          class="action-card"
+          data-section="outfits"
+        >
+
+          <span class="action-icon">
+            ✦
+          </span>
+
+          <span>
+            Create Outfit
+          </span>
+
+        </button>
+
+      </section>
+
+    </section>
+
+
+    <!-- ===================================================
+         WARDROBE
+         =================================================== -->
+
+    <section
+      class="page"
+      data-page="wardrobe"
+      id="wardrobePage"
+    >
+
+      <div class="page-header">
+
+        <div>
+
+          <span class="eyebrow">
+            MY CLOSET
+          </span>
+
+          <h2>
+            My Wardrobe
+          </h2>
+
+          <p>
+            Everything you've added to Style Synth.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- SEARCH -->
+
+      <div class="search-box">
+
+        <input
+          type="search"
+          id="searchInput"
+          placeholder="Search your wardrobe..."
+          autocomplete="off"
+        >
+
+      </div>
+
+
+      <!-- FILTERS -->
+
+      <div class="filter-row">
+
+        <button
+          type="button"
+          class="filter-button active"
+          data-filter="all"
+        >
+          All
+        </button>
+
+        <button
+          type="button"
+          class="filter-button"
+          data-filter="Shirt"
+        >
+          Shirts
+        </button>
+
+        <button
+          type="button"
+          class="filter-button"
+          data-filter="T-Shirt"
+        >
+          T-Shirts
+        </button>
+
+        <button
+          type="button"
+          class="filter-button"
+          data-filter="Pants"
+        >
+          Pants
+        </button>
+
+        <button
+          type="button"
+          class="filter-button"
+          data-filter="Shoes"
+        >
+          Shoes
+        </button>
+
+        <button
+          type="button"
+          class="filter-button"
+          data-filter="Accessory"
+        >
+          Accessories
+        </button>
+
+        <button
+          type="button"
+          class="filter-button"
+          data-filter="Jacket"
+        >
+          Jackets
+        </button>
+
+      </div>
+
+
+      <!-- WARDROBE GRID -->
+
+      <div
+        id="wardrobeGrid"
+        class="wardrobe-grid"
+      >
+
+        <div class="empty-wardrobe">
+
+          <h3>
+            Your wardrobe is empty
+          </h3>
+
+          <p>
+            Upload your first clothing item
+            from the Home page.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         OUTFITS
+         =================================================== -->
+
+    <section
+      class="page"
+      data-page="outfits"
+      id="outfitsPage"
+    >
+
+      <div class="page-header">
+
+        <div>
+
+          <span class="eyebrow">
+            STYLE LAB
+          </span>
+
+          <h2>
+            Outfit Generator
+          </h2>
+
+          <p>
+            Mix items from your wardrobe to create
+            an outfit.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- GENERATOR -->
+
+      <section class="card generator-card">
+
+        <div class="generator-content">
+
+          <div class="generator-icon">
+            ✦
+          </div>
+
+          <h3>
+            Generate a look
+          </h3>
+
+          <p>
+            Style Synth will select pieces from
+            your wardrobe.
+          </p>
+
+          <button
+            type="button"
+            id="generateOutfit"
+            class="primary-button"
+            data-action="generate-outfit"
+          >
+            Generate Outfit
+          </button>
+
+        </div>
+
+      </section>
+
+
+      <!-- GENERATED OUTFIT -->
+
+      <section
+        id="generatedOutfit"
+        class="generated-outfit"
+      ></section>
+
+
+      <!-- HISTORY -->
+
+      <section class="card">
+
+        <div class="section-heading">
+
+          <div>
+
+            <span class="eyebrow">
+              HISTORY
+            </span>
+
+            <h2>
+              Previous Outfits
+            </h2>
+
+          </div>
+
+        </div>
+
+        <div
+          id="outfitHistory"
+          class="outfit-history"
+        >
+
+          <p>
+            No saved outfits yet.
+          </p>
+
+        </div>
+
+      </section>
+
+    </section>
+
+
+    <!-- ===================================================
+         ABOUT
+         =================================================== -->
+
+    <section
+      class="page"
+      data-page="about"
+      id="aboutPage"
+    >
+
+      <div class="page-header">
+
+        <span class="eyebrow">
+          STYLE SYNTH AI
+        </span>
+
+        <h2>
+          Your wardrobe,
+          organized.
+        </h2>
+
+        <p>
+          Style Synth is a browser-based digital wardrobe
+          that helps you organize clothing, identify basic
+          item information and create outfit combinations.
+        </p>
+
+      </div>
+
+
+      <div class="feature
