@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+  <meta name="theme-color" content="#090b10">
+  <meta name="description" content="Style Synth AI - Your personal AI wardrobe stylist">
+
+  <title>Style Synth AI</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- APP -->
+  <div class="app">
+
+    <!-- HEADER -->
+    <header class="topbar">
+
+      <div>
+        <div class="brand">
+          <span class="brand-icon">✦</span>
+          <span>STYLE SYNTH</span>
+        </div>
+
+        <p class="subtitle">Your intelligent wardrobe</p>
+      </div>
+
+      <button class="icon-btn" id="settingsBtn" aria-label="Settings">
+        ⚙
+      </button>
+
+    </header>
+
+
+    <!-- HOME -->
+    <main>
+
+      <section class="hero">
+
+        <div class="hero-content">
+
+          <span class="eyebrow">AI WARDROBE</span>
+
+          <h1>
+            Dress smarter.<br>
+            <span>Look effortless.</span>
+          </h1>
+
+          <p>
+            Organize your wardrobe and create outfits
+            from what you already own.
+          </p>
+
+          <button class="primary-btn" id="generateHeroBtn">
+            <span>✦</span>
+            Generate outfit
+          </button>
+
+        </div>
+
+      </section>
+
+
+      <!-- QUICK STATS -->
+
+      <section class="stats">
+
+        <div class="stat-card">
+          <span class="stat-number" id="totalItems">0</span>
+          <span class="stat-label">Items</span>
+        </div>
+
+        <div class="stat-card">
+          <span class="stat-number" id="favoriteItems">0</span>
+          <span class="stat-label">Favorites</span>
+        </div>
+
+        <div class="stat-card">
+          <span class="stat-number" id="outfitCount">0</span>
+          <span class="stat-label">Outfits</span>
+        </div>
+
+      </section>
+
+
+      <!-- AI STYLIST -->
+
+      <section class="section">
+
+        <div class="section-heading">
+
+          <div>
+            <span class="eyebrow">STYLE SYNTH</span>
+            <h2>AI Stylist</h2>
+          </div>
+
+          <span class="status">
+            <span class="status-dot"></span>
+            Ready
+          </span>
+
+        </div>
+
+
+        <div class="stylist-card">
+
+          <div class="stylist-icon">
+            ✦
+          </div>
+
+          <div class="stylist-text">
+
+            <h3>What should I wear?</h3>
+
+            <p>
+              Tell me the occasion and I'll build
+              an outfit from your wardrobe.
+            </p>
+
+          </div>
+
+          <button class="small-btn" id="stylistBtn">
+            Try
+          </button>
+
+        </div>
+
+      </section>
+
+
+      <!-- WARDROBE -->
+
+      <section class="section">
+
+        <div class="section-heading">
+
+          <div>
+            <span class="eyebrow">YOUR CLOSET</span>
+            <h2>My Wardrobe</h2>
+          </div>
+
+          <button class="add-btn" id="addItemBtn">
+            +
+          </button>
+
+        </div>
+
+
+        <!-- SEARCH -->
+
+        <div class="search-box">
+
+          <span>⌕</span>
+
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Search your wardrobe..."
+          >
+
+        </div>
+
+
+        <!-- FILTERS -->
+
+        <div class="filters">
+
+          <button class="filter active" data-filter="all">
+            All
+          </button>
+
+          <button class="filter" data-filter="top">
+            Tops
+          </button>
+
+          <button class="filter" data-filter="bottom">
+            Bottoms
+          </button>
+
+          <button class="filter" data-filter="shoes">
+            Shoes
+          </button>
+
+          <button class="filter" data-filter="accessory">
+            Accessories
+          </button>
+
+        </div>
+
+
+        <!-- ITEMS -->
+
+        <div class="wardrobe-grid" id="wardrobeGrid">
+
+          <div class="empty-state" id="emptyState">
+
+            <div class="empty-icon">
+              👕
+            </div>
+
+            <h3>Your wardrobe is empty</h3>
+
+            <p>
+              Add your first clothing item to start
+              building outfits.
+            </p>
+
+            <button class="primary-btn" id="emptyAddBtn">
+              Add first item
+            </button>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- OUTFIT GENERATOR -->
+
+      <section class="section">
+
+        <div class="section-heading">
+
+          <div>
+            <span class="eyebrow">STYLE LAB</span>
+            <h2>Outfit Generator</h2>
+          </div>
+
+        </div>
+
+
+        <div class="generator-card">
+
+          <div class="generator-header">
+
+            <div>
+              <h3>Build my look</h3>
+              <p>Generate a complete outfit.</p>
+            </div>
+
+            <span class="sparkle">✦</span>
+
+          </div>
+
+
+          <div class="occasion-buttons">
+
+            <button class="occasion active" data-occasion="casual">
+              Casual
+            </button>
+
+            <button class="occasion" data-occasion="college">
+              College
+            </button>
+
+            <button class="occasion" data-occasion="party">
+              Party
+            </button>
+
+            <button class="occasion" data-occasion="formal">
+              Formal
+            </button>
+
+          </div>
+
+
+          <button class="generate-btn" id="generateBtn">
+            ✦ Generate my outfit
+          </button>
+
+        </div>
+
+
+        <!-- GENERATED OUTFIT -->
+
+        <div class="outfit-result hidden" id="outfitResult">
+
+          <div class="result-header">
+
+            <div>
+              <span class="eyebrow">YOUR LOOK</span>
+              <h3 id="outfitTitle">Generated outfit</h3>
+            </div>
+
+            <button class="icon-btn" id="closeOutfit">
+              ×
+            </button>
+
+          </div>
+
+          <div class="outfit-grid" id="outfitGrid"></div>
+
+          <div class="style-note" id="styleNote"></div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+
+    <!-- BOTTOM NAV -->
+
+    <nav class="bottom-nav">
+
+      <button class="nav-item active" data-scroll="top">
+        <span>⌂</span>
+        <small>Home</small>
+      </button>
+
+      <button class="nav-item" data-scroll="wardrobe">
+        <span>▦</span>
+        <small>Wardrobe</small>
+      </button>
+
+      <button class="nav-center" id="navGenerate">
+        ✦
+      </button>
+
+      <button class="nav-item" data-scroll="outfit">
+        <span>◈</span>
+        <small>Looks</small>
+      </button>
+
+      <button class="nav-item" id="navAdd">
+        <span>＋</span>
+        <small>Add</small>
+      </button>
+
+    </nav>
+
+  </div>
+
+
+  <!-- ADD ITEM MODAL -->
+
+  <div class="modal hidden" id="addModal">
+
+    <div class="modal-overlay" id="modalOverlay"></div>
+
+    <div class="modal-card">
+
+      <div class="modal-header">
+
+        <div>
+          <span class="eyebrow">NEW ITEM</span>
+          <h2>Add to wardrobe</h2>
+        </div>
+
+        <button class="close-btn" id="closeModal">
+          ×
+        </button>
+
+      </div>
+
+
+      <!-- IMAGE -->
+
+      <label class="upload-area" for="imageInput">
+
+        <input
+          type="file"
+          id="imageInput"
+          accept="image/*"
+          hidden
+        >
+
+        <div id="uploadPreview">
+
+          <span class="upload-icon">＋</span>
+
+          <strong>Upload clothing photo</strong>
+
+          <small>Choose an image from your phone</small>
+
+        </div>
+
+      </label>
+
+
+      <!-- NAME -->
+
+      <label class="field">
+
+        <span>Item name</span>
+
+        <input
+          type="text"
+          id="itemName"
+          placeholder="e.g. Black oversized shirt"
+        >
+
+      </label>
+
+
+      <!-- CATEGORY -->
+
+      <label class="field">
+
+        <span>Category</span>
+
+        <select id="itemCategory">
+
+          <option value="top">Top</option>
+          <option value="bottom">Bottom</option>
+          <option value="shoes">Shoes</option>
+          <option value="accessory">Accessory</option>
+
+        </select>
+
+      </label>
+
+
+      <!-- COLOR -->
+
+      <label class="field">
+
+        <span>Color</span>
+
+        <select id="itemColor">
+
+          <option value="black">Black</option>
+          <option value="white">White</option>
+          <option value="blue">Blue</option>
+          <option value="beige">Beige</option>
+          <option value="brown">Brown</option>
+          <option value="grey">Grey</option>
+          <option value="green">Green</option>
+          <option value="red">Red</option>
+          <option value="other">Other</option>
+
+        </select>
+
+      </label>
+
+
+      <!-- SEASON -->
+
+      <label class="field">
+
+        <span>Season</span>
+
+        <select id="itemSeason">
+
+          <option value="all">All season</option>
+          <option value="summer">Summer</option>
+          <option value="winter">Winter</option>
+          <option value="monsoon">Monsoon</option>
+
+        </select>
+
+      </label>
+
+
+      <button class="primary-btn full" id="saveItemBtn">
+        Add to wardrobe
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- STYLIST MODAL -->
+
+  <div class="modal hidden" id="stylistModal">
+
+    <div class="modal-overlay" id="stylistOverlay"></div>
+
+    <div class="modal-card stylist-modal">
+
+      <div class="modal-header">
+
+        <div>
+          <span class="eyebrow">STYLE SYNTH AI</span>
+          <h2>Tell me your vibe</h2>
+        </div>
+
+        <button class="close-btn" id="closeStylist">
+          ×
+        </button>
+
+      </div>
+
+
+      <div class="ai-message">
+
+        <div class="ai-avatar">✦</div>
+
+        <p>
+          What are you dressing for today?
+        </p>
+
+      </div>
+
+
+      <div class="ai-options">
+
+        <button data-ai="college">
+          🎓 College
+        </button>
+
+        <button data-ai="casual">
+          ☕ Casual day
+        </button>
+
+        <button data-ai="party">
+          ✨ Party
+        </button>
+
+        <button data-ai="formal">
+          🖤 Formal
+        </button>
+
+        <button data-ai="date">
+          🌙 Evening
+        </button>
+
+        <button data-ai="travel">
+          ✈️ Travel
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- TOAST -->
+
+  <div class="toast" id="toast">
+    <span>✓</span>
+    <span id="toastText">Done</span>
+  </div>
+
+
+  <script src="script.js"></script>
+
+</body>
+</html>
