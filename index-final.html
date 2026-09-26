@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="Style Synth AI - Your smart digital wardrobe and outfit assistant."
+  >
+
+  <title>Style Synth AI</title>
+
+  <!-- NEW CSS -->
+  <link rel="stylesheet" href="style-new.css">
+</head>
+
+<body>
+
+  <!-- =========================
+       HEADER
+  ========================== -->
+  <header class="app-header">
+
+    <div class="brand">
+      <div class="brand-icon">✦</div>
+
+      <div>
+        <h1>Style Synth</h1>
+        <p>AI Wardrobe</p>
+      </div>
+    </div>
+
+    <button
+      id="menuButton"
+      class="menu-button"
+      type="button"
+      aria-label="Open menu"
+    >
+      ☰
+    </button>
+
+  </header>
+
+
+  <!-- =========================
+       NAVIGATION
+  ========================== -->
+  <nav class="main-nav">
+
+    <button
+      class="nav-button active"
+      data-section="home"
+      type="button"
+    >
+      🏠 Home
+    </button>
+
+    <button
+      class="nav-button"
+      data-section="wardrobe"
+      type="button"
+    >
+      👕 Wardrobe
+    </button>
+
+    <button
+      class="nav-button"
+      data-section="outfits"
+      type="button"
+    >
+      ✨ Outfits
+    </button>
+
+    <button
+      class="nav-button"
+      data-section="about"
+      type="button"
+    >
+      ℹ️ About
+    </button>
+
+  </nav>
+
+
+  <!-- =========================
+       APP MESSAGE
+  ========================== -->
+  <div
+    id="appMessage"
+    class="app-message"
+    aria-live="polite"
+  ></div>
+
+
+  <main>
+
+
+    <!-- =========================
+         HOME SECTION
+    ========================== -->
+    <section
+      id="home"
+      class="page-section active-section"
+    >
+
+      <!-- HERO -->
+      <div class="hero-section">
+
+        <div class="hero-content">
+
+          <span class="hero-badge">
+            ✨ Smart Digital Wardrobe
+          </span>
+
+          <h2>
+            Your wardrobe.
+            <br>
+            <span>Smarter than ever.</span>
+          </h2>
+
+          <p>
+            Upload your clothing photos and organize your
+            wardrobe with smart style suggestions.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- =========================
+           UPLOAD CARD
+      ========================== -->
+      <div class="card upload-card">
+
+        <div class="card-header">
+
+          <div>
+            <span class="section-label">
+              ADD TO WARDROBE
+            </span>
+
+            <h3>
+              Upload an item
+            </h3>
+
+            <p>
+              Add a photo of a shirt, pant, shoe or accessory.
+            </p>
+          </div>
+
+        </div>
+
+
+        <!-- Upload area -->
+        <label
+          for="imageInput"
+          class="upload-area"
+          id="uploadArea"
+        >
+
+          <div class="upload-icon">
+            📸
+          </div>
+
+          <h4>
+            Tap to upload
+          </h4>
+
+          <p>
+            Choose a clothing photo from your device
+          </p>
+
+          <span class="upload-button">
+            Choose Photo
+          </span>
+
+        </label>
+
+
+        <input
+          type="file"
+          id="imageInput"
+          accept="image/*"
+          hidden
+        >
+
+
+        <!-- IMAGE PREVIEW -->
+        <div
+          id="imagePreviewContainer"
+          class="image-preview-container"
+          hidden
+        >
+
+          <div class="preview-header">
+
+            <h4>
+              Selected image
+            </h4>
+
+            <button
+              id="removeImage"
+              class="text-button"
+              type="button"
+            >
+              Remove
+            </button>
+
+          </div>
+
+          <img
+            id="imagePreview"
+            class="image-preview"
+            src=""
+            alt="Selected clothing"
+          >
+
+          <button
+            id="analyzeButton"
+            class="primary-button"
+            type="button"
+          >
+            ✨ Analyze Item
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- =========================
+           ANALYSIS RESULT
+      ========================== -->
+      <div
+        id="analysisCard"
+        class="card analysis-card"
+        hidden
+      >
+
+        <div class="card-header">
+
+          <div>
+            <span class="section-label">
+              AI ANALYSIS
+            </span>
+
+            <h3>
+              Item detected
+            </h3>
+          </div>
+
+          <span class="status-badge">
+            Ready
+          </span>
+
+        </div>
+
+
+        <div id="analysisResult">
+
+          <div class="analysis-grid">
+
+            <!-- CATEGORY -->
+            <div class="analysis-item">
+
+              <span class="analysis-label">
+                Category
+              </span>
+
+              <strong id="detectedCategory">
+                —
+              </strong>
+
+            </div>
+
+
+            <!-- COLOR -->
+            <div class="analysis-item">
+
+              <span class="analysis-label">
+                Color
+              </span>
+
+              <strong id="detectedColor">
+                —
+              </strong>
+
+            </div>
+
+
+            <!-- BRAND -->
+            <div class="analysis-item">
+
+              <span class="analysis-label">
+                Brand
+              </span>
+
+              <strong id="detectedBrand">
+                —
+              </strong>
+
+            </div>
+
+
+            <!-- OCCASION -->
+            <div class="analysis-item">
+
+              <span class="analysis-label">
+                Occasion
+              </span>
+
+              <strong id="detectedOccasion">
+                —
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          <!-- =========================
+               EDIT CONTROLS
+          ========================== -->
+          <div
+            id="editControls"
+            class="edit-controls"
+            hidden
+          >
+
+            <div class="edit-header">
+
+              <div>
+                <span class="section-label">
+                  CORRECT INFORMATION
+                </span>
+
+                <h4>
+                  Edit item
+                </h4>
+              </div>
+
+            </div>
+
+
+            <div class="form-grid">
+
+              <!-- CATEGORY -->
+              <div class="form-group">
+
+                <label for="editCategory">
+                  Category
+                </label>
+
+                <select id="editCategory">
+
+                  <option value="top">
+                    Shirt / Top
+                  </option>
+
+                  <option value="bottom">
+                    Pants / Bottom
+                  </option>
+
+                  <option value="shoes">
+                    Shoes
+                  </option>
+
+                  <option value="accessory">
+                    Accessory
+                  </option>
+
+                  <option value="outerwear">
+                    Outerwear
+                  </option>
+
+                  <option value="dress">
+                    Dress
+                  </option>
+
+                  <option value="other">
+                    Other
+                  </option>
+
+                </select>
+
+              </div>
+
+
+              <!-- COLOR -->
+              <div class="form-group">
+
+                <label for="editColor">
+                  Color
+                </label>
+
+                <input
+                  id="editColor"
+                  type="text"
+                  placeholder="Example: Black"
+                >
+
+              </div>
+
+
+              <!-- BRAND -->
+              <div class="form-group">
+
+                <label for="editBrand">
+                  Brand
+                </label>
+
+                <input
+                  id="editBrand"
+                  type="text"
+                  placeholder="Example: Nike"
+                >
+
+              </div>
+
+
+              <!-- OCCASION -->
+              <div class="form-group">
+
+                <label for="editOccasion">
+                  Occasion
+                </label>
+
+                <select id="editOccasion">
+
+                  <option value="casual">
+                    Casual
+                  </option>
+
+                  <option value="college">
+                    College
+                  </option>
+
+                  <option value="formal">
+                    Formal
+                  </option>
+
+                  <option value="party">
+                    Party
+                  </option>
+
+                  <option value="sports">
+                    Sports
+                  </option>
+
+                  <option value="travel">
+                    Travel
+                  </option>
+
+                </select>
+
+              </div>
+
+            </div>
+
+
+            <div class="edit-actions">
+
+              <button
+                id="saveEdit"
+                class="primary-button"
+                type="button"
+              >
+                Save Changes
+              </button>
+
+              <button
+                id="cancelEdit"
+                class="secondary-button"
+                type="button"
+              >
+                Cancel
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <!-- ACTIONS -->
+          <div class="analysis-actions">
+
+            <button
+              id="editItem"
+              class="secondary-button"
+              type="button"
+            >
+              ✏️ Edit
+            </button>
+
+            <button
+              id="addToWardrobe"
+              class="primary-button"
+              type="button"
+            >
+              + Add to Wardrobe
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- =========================
+           STATS
+      ========================== -->
+      <div class="stats-grid">
+
+        <div class="stat-card">
+
+          <span class="stat-icon">
+            👗
+          </span>
+
+          <div>
+            <strong id="totalItems">
+              0
+            </strong>
+
+            <span>
+              Total Items
+            </span>
+          </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <span class="stat-icon">
+            👕
+          </span>
+
+          <div>
+            <strong id="topCount">
+              0
+            </strong>
+
+            <span>
+              Tops
+            </span>
+          </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <span class="stat-icon">
+            👖
+          </span>
+
+          <div>
+            <strong id="bottomCount">
+              0
+            </strong>
+
+            <span>
+              Bottoms
+            </span>
+          </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <span class="stat-icon">
+            👟
+          </span>
+
+          <div>
+            <strong id="shoeCount">
+              0
+            </strong>
+
+            <span>
+              Shoes
+            </span>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- =========================
+           QUICK ACTIONS
+      ========================== -->
+      <div class="card quick-actions-card">
+
+        <div class="card-header">
+
+          <div>
+
+            <span class="section-label">
+              QUICK ACTIONS
+            </span>
+
+            <h3>
+              Style tools
+            </h3>
+
+          </div>
+
+        </div>
+
+
+        <div class="quick-actions">
+
+          <button
+            class="quick-action"
+            data-action="upload"
+            type="button"
+          >
+
+            <span>
+              📸
+            </span>
+
+            <strong>
+              Add Item
+            </strong>
+
+            <small>
+              Upload clothing
+            </small>
+
+          </button>
+
+
+          <button
+            class="quick-action"
+            data-action="wardrobe"
+            type="button"
+          >
+
+            <span>
+              👗
+            </span>
+
+            <strong>
+              My Wardrobe
+            </strong>
+
+            <small>
+              View all items
+            </small>
+
+          </button>
+
+
+          <button
+            class="quick-action"
+            data-action="outfits"
+            type="button"
+          >
+
+            <span>
+              ✨
+            </span>
+
+            <strong>
+              Generate Outfit
+            </strong>
+
+            <small>
+              Create a look
+            </small>
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         WARDROBE SECTION
+    ========================== -->
+    <section
+      id="wardrobe"
+      class="page-section"
+    >
+
+      <div class="page-heading">
+
+        <span class="section-label">
+          YOUR COLLECTION
+        </span>
+
+        <h2>
+          My Wardrobe
+        </h2>
+
+        <p>
+          Everything you have added to your digital wardrobe.
+        </p>
+
+      </div>
+
+
+      <!-- SEARCH -->
+      <div class="card search-card">
+
+        <div class="search-box">
+
+          <span>
+            🔍
+          </span>
+
+          <input
+            id="searchInput"
+            type="search"
+            placeholder="Search your wardrobe..."
+            autocomplete="off"
+          >
+
+        </div>
+
+
+        <!-- FILTERS -->
+        <div class="filter-buttons">
+
+          <button
+            class="filter-button active"
+            data-filter="all"
+            type="button"
+          >
+            All
+          </button>
+
+          <button
+            class="filter-button"
+            data-filter="top"
+            type="button"
+          >
+            Tops
+          </button>
+
+          <button
+            class="filter-button"
+            data-filter="bottom"
+            type="button"
+          >
+            Bottoms
+          </button>
+
+          <button
+            class="filter-button"
+            data-filter="shoes"
+            type="button"
+          >
+            Shoes
+          </button>
+
+          <button
+            class="filter-button"
+            data-filter="accessory"
+            type="button"
+          >
+            Accessories
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- WARDROBE GRID -->
+      <div
+        id="wardrobeGrid"
+        class="wardrobe-grid"
+      >
+      </div>
+
+
+      <!-- EMPTY STATE -->
+      <div
+        id="wardrobeEmpty"
+        class="empty-state"
+      >
+
+        <div class="empty-icon">
+          👕
+        </div>
+
+        <h3>
+          Your wardrobe is empty
+        </h3>
+
+        <p>
+          Add your first clothing item to start building
+          your digital wardrobe.
+        </p>
+
+        <button
+          class="primary-button"
+          data-action="upload"
+          type="button"
+        >
+          + Add First Item
+        </button>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         OUTFITS SECTION
+    ========================== -->
+    <section
+      id="outfits"
+      class="page-section"
+    >
+
+      <div class="page-heading">
+
+        <span class="section-label">
+          STYLE GENERATOR
+        </span>
+
+        <h2>
+          Outfit Generator
+        </h2>
+
+        <p>
+          Create outfit combinations from your wardrobe.
+        </p>
+
+      </div>
+
+
+      <!-- GENERATOR -->
+      <div class="card outfit-generator-card">
+
+        <div class="generator-icon">
+          ✨
+        </div>
+
+        <h3>
+          Generate a look
+        </h3>
+
+        <p>
+          Let Style Synth combine your wardrobe items
+          into an outfit.
+        </p>
+
+        <button
+          id="generateOutfit"
+          class="primary-button large-button"
+          type="button"
+        >
+          ✨ Generate Outfit
+        </button>
+
+      </div>
+
+
+      <!-- GENERATED OUTFIT -->
+      <div
+        id="generatedOutfit"
+        class="generated-outfit"
+      >
+      </div>
+
+
+      <!-- OUTFIT HISTORY -->
+      <div class="card history-card">
+
+        <div class="card-header">
+
+          <div>
+
+            <span class="section-label">
+              HISTORY
+            </span>
+
+            <h3>
+              Previous outfits
+            </h3>
+
+          </div>
+
+        </div>
+
+        <div
+          id="outfitHistory"
+          class="outfit-history"
+        >
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         ABOUT SECTION
+    ========================== -->
+    <section
+      id="about"
+      class="page-section"
+    >
+
+      <div class="page-heading">
+
+        <span class="section-label">
+          ABOUT THE APP
+        </span>
+
+        <h2>
+          Style Synth AI
+        </h2>
+
+        <p>
+          A simple digital wardrobe built to help you
+          organize clothes and create outfits.
+        </p>
+
+      </div>
+
+
+      <div class="about-grid">
+
+        <div class="card about-card">
+
+          <div class="about-icon">
+            🤖
+          </div>
+
+          <h3>
+            Smart Analysis
+          </h3>
+
+          <p>
+            Upload a clothing image and Style Synth can
+            estimate useful information such as category,
+            color and occasion.
+          </p>
+
+        </div>
+
+
+        <div class="card about-card">
+
+          <div class="about-icon">
+            👗
+          </div>
+
+          <h3>
+            Digital Wardrobe
+          </h3>
+
+          <p>
+            Keep your clothing collection organized in
+            one convenient place.
+          </p>
+
+        </div>
+
+
+        <div class="card about-card">
+
+          <div class="about-icon">
+            ✨
+          </div>
+
+          <h3>
+            Outfit Ideas
+          </h3>
+
+          <p>
+            Generate combinations using items already
+            saved in your wardrobe.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- IMPORTANT NOTE -->
+      <div class="card info-card">
+
+        <h3>
+          About the current version
+        </h3>
+
+        <p>
+          This free version performs image analysis directly
+          in your browser using JavaScript-based detection.
+          It does not require a paid AI service.
+        </p>
+
+        <p>
+          Real AI vision features such as reliable brand
+          recognition from arbitrary photos can be connected
+          later through a suitable AI vision API.
+        </p>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+  <footer class="app-footer">
+
+    <p>
+      © 2026 Style Synth AI
+    </p>
+
+    <p>
+      Your wardrobe. Your style.
+    </p>
+
+  </footer>
+
+
+
+  <!-- =========================
+       NEW JAVASCRIPT
+       THIS IS IMPORTANT
+  ========================== -->
+
+  <script src="script-new.js"></script>
+
+</body>
+</html>
